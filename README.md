@@ -1,2 +1,3 @@
 # bite-rush
-API for a Web-Based Food Delivery Application
+API for a Food Delivery Application
+
