@@ -4,6 +4,11 @@
 	You will also need to update the Dockerfile to use .NET 8 instead of .NET 9 - both are in Web.Api project.-->
     <!--<TargetFramework>net8.0</TargetFramework>-->
 
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+
+
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
