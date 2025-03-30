@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\Todos\" />
+    <Folder Include="Endpoints\Products\Commands\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
