@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250329191229_CreateProductModel")]
-    partial class CreateProductModel
+    [Migration("20250330180957_AddProductModel")]
+    partial class AddProductModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,11 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.PrimitiveCollection<List<string>>("Images")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("images");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -52,60 +57,14 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("price");
 
+                    b.Property<long>("Updated")
+                        .HasColumnType("bigint")
+                        .HasColumnName("updated");
+
                     b.HasKey("Id")
                         .HasName("pk_products");
 
                     b.ToTable("products", "public");
-                });
-
-            modelBuilder.Entity("Domain.Todos.TodoItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime?>("CompletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("completed_at");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<DateTime?>("DueDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("due_date");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_completed");
-
-                    b.PrimitiveCollection<List<string>>("Labels")
-                        .IsRequired()
-                        .HasColumnType("text[]")
-                        .HasColumnName("labels");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_todo_items");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_todo_items_user_id");
-
-                    b.ToTable("todo_items", "public");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
@@ -143,16 +102,6 @@ namespace Infrastructure.Database.Migrations
                         .HasDatabaseName("ix_users_email");
 
                     b.ToTable("users", "public");
-                });
-
-            modelBuilder.Entity("Domain.Todos.TodoItem", b =>
-                {
-                    b.HasOne("Domain.Users.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_todo_items_users_user_id");
                 });
 #pragma warning restore 612, 618
         }
