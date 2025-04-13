@@ -21,6 +21,7 @@ internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext)
             Description = product.Description ?? string.Empty,
             Images = product.Images ?? new List<string>(),
             Price = product.Price,
+            PriceId = product.PriceId,
             Active = product.Active,
             Updated = product.Updated
         }).ToList();

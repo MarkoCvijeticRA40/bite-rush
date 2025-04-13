@@ -54,6 +54,11 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("price");
 
+                    b.Property<string>("PriceId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("price_id");
+
                     b.Property<long>("Updated")
                         .HasColumnType("bigint")
                         .HasColumnName("updated");
