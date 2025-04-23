@@ -1,4 +1,4 @@
-﻿using Domain.Product;
+﻿using Domain.Products;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,5 +8,6 @@ public interface IApplicationDbContext
 {
     DbSet<User> Users { get; }
     DbSet<Product> Products { get; }
+    DbSet<ProductPrice> ProductPrices { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
