@@ -24,11 +24,10 @@ namespace Infrastructure.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Product.Product", b =>
+            modelBuilder.Entity("Domain.Products.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
 
                     b.Property<bool>("Active")
@@ -45,19 +44,14 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("text[]")
                         .HasColumnName("images");
 
+                    b.Property<bool>("LiveMode")
+                        .HasColumnType("boolean")
+                        .HasColumnName("live_mode");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
-
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint")
-                        .HasColumnName("price");
-
-                    b.Property<string>("PriceId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("price_id");
 
                     b.Property<long>("Updated")
                         .HasColumnType("bigint")
@@ -67,6 +61,51 @@ namespace Infrastructure.Database.Migrations
                         .HasName("pk_products");
 
                     b.ToTable("products", "public");
+                });
+
+            modelBuilder.Entity("Domain.Products.ProductPrice", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean")
+                        .HasColumnName("active");
+
+                    b.Property<string>("BillingScheme")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("billing_scheme");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("text")
+                        .HasColumnName("currency");
+
+                    b.Property<bool>("Livemode")
+                        .HasColumnType("boolean")
+                        .HasColumnName("livemode");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("product_id");
+
+                    b.Property<long?>("UnitAmount")
+                        .HasColumnType("bigint")
+                        .HasColumnName("unit_amount");
+
+                    b.Property<decimal?>("UnitAmountDecimal")
+                        .HasColumnType("numeric")
+                        .HasColumnName("unit_amount_decimal");
+
+                    b.HasKey("Id")
+                        .HasName("pk_product_prices");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_product_prices_product_id");
+
+                    b.ToTable("product_prices", "public");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
@@ -104,6 +143,23 @@ namespace Infrastructure.Database.Migrations
                         .HasDatabaseName("ix_users_email");
 
                     b.ToTable("users", "public");
+                });
+
+            modelBuilder.Entity("Domain.Products.ProductPrice", b =>
+                {
+                    b.HasOne("Domain.Products.Product", "Product")
+                        .WithMany("Prices")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_product_prices_products_product_id");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Domain.Products.Product", b =>
+                {
+                    b.Navigation("Prices");
                 });
 #pragma warning restore 612, 618
         }

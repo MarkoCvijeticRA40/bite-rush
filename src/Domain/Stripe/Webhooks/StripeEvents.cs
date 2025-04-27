@@ -7,7 +7,7 @@ public static class StripeEvents
     public const string ProductDeleted = "product.deleted";
 
     //Price events
-    public const string ProductPriceCreated = "product.price.created";
-    public const string ProductPriceUpdated = "product.price.updated";
-    public const string ProductPriceDeleted = "product.price.deleted";
+    public const string ProductPriceCreated = "price.created";
+    public const string ProductPriceUpdated = "price.updated";
+    public const string ProductPriceDeleted = "price.deleted";
 }
