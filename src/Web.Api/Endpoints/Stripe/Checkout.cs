@@ -1,5 +1,5 @@
-﻿using Application.Stripe.CheckoutOrder;
-using Domain.Stripe;
+﻿using Application.Stripe.Checkout;
+using Domain.Stripe.Checkout;
 using MediatR;
 using SharedKernel;
 
