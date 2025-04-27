@@ -403,3 +403,4 @@ FodyWeavers.xsd
 
 # Random files
 Progress.txt
+/package-lock.json
