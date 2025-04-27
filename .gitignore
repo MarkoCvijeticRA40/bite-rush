@@ -400,3 +400,6 @@ FodyWeavers.xsd
 .containers/
 /frontend/package-lock.json
 /frontend/package.json
+
+# Random files
+Progress.txt
