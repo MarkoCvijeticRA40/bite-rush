@@ -1,26 +1,38 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Domain.Products;
+using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
 namespace Application.Stripe.ProductPrices.Update;
+
 internal sealed class UpdateProductPriceCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateProductPriceCommand, string>
 {
     public async Task<Result<string>> Handle(UpdateProductPriceCommand request, CancellationToken cancellationToken)
     {
-        var product = new ProductPrice
+        Domain.Products.ProductPrice existingProductPrice = await dbContext.ProductPrices.FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
+
+        if (existingProductPrice != null && request != null)
         {
-            Active = request.Active,
-            BillingScheme = request.BillingScheme,
-            Currency = request.Currency,
-            Livemode = request.LiveMode,
-            ProductId = request.ProductId,
-            UnitAmount = request.UnitAmount,
-            UnitAmountDecimal = request.UnitAmountDecimal,
-        };
+            existingProductPrice.Active = request.Active;
+            existingProductPrice.BillingScheme = "Updated";
+            existingProductPrice.Currency = request.Currency;
+            existingProductPrice.Livemode = request.LiveMode;
+            existingProductPrice.ProductId = request.ProductId;
+            existingProductPrice.UnitAmount = request.UnitAmount;
+            existingProductPrice.UnitAmountDecimal = request.UnitAmountDecimal;
+        }
 
-        await dbContext.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
 
-        return Result.Success<string>($"Product Price with {request.Id} successfully updated.");
+            return Result.Failure<string>(ProductPriceErrors.DatabaseError(ex));
+        }
+
+        return Result.Success<string>($"Product Price with {request?.Id} successfully updated.");
     }
 }

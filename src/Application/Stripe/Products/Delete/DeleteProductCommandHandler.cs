@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
 namespace Application.Products.Delete;
+
 internal sealed class DeleteProductCommandHandler(IApplicationDbContext context) : ICommandHandler<DeleteProductCommand, string>
 {
     public async Task<Result<string>> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
@@ -18,8 +19,16 @@ internal sealed class DeleteProductCommandHandler(IApplicationDbContext context)
             return Result.Failure<string>(ProductErrors.NotFound(command.ProductId));
         }
 
-        context.Products.Remove(product);
-        await context.SaveChangesAsync(cancellationToken);
+        try
+        {
+            context.Products.Remove(product);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+
+            return Result.Failure<string>(ProductErrors.DatabaseError(ex));
+        }
 
         return Result.Success<string>($"Product with {product.Id} deleted successfully.");
     }

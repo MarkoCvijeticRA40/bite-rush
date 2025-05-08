@@ -8,5 +8,5 @@ public sealed record class UpdateProductPriceCommand(
     string Currency,
     bool LiveMode,
     string ProductId,
-    long? UnitAmount,
-    decimal? UnitAmountDecimal) : ICommand<string>;
+    long UnitAmount,
+    decimal UnitAmountDecimal) : ICommand<string>;

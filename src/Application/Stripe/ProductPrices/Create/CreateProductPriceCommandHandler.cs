@@ -19,8 +19,15 @@ internal sealed class CreateProductPriceCommandHandler(IApplicationDbContext dbC
             UnitAmountDecimal = request.UnitAmountDecimal,
         };
 
-        await dbContext.ProductPrices.AddAsync(productPrice, cancellationToken);
-        await dbContext.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await dbContext.ProductPrices.AddAsync(productPrice, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<string>(ProductPriceErrors.DatabaseError(ex));
+        }
 
         return Result.Success<string>($"Product price with {productPrice.Id} successfully created.");
     }

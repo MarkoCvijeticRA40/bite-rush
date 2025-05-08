@@ -4,6 +4,7 @@ using Domain.Products;
 using SharedKernel;
 
 namespace Application.Products.Create;
+
 internal sealed class CreateProductCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateProductCommand, string>
 {
     public async Task<Result<string>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -19,8 +20,16 @@ internal sealed class CreateProductCommandHandler(IApplicationDbContext dbContex
             Updated = request.Updated,
         };
 
-        await dbContext.Products.AddAsync(product, cancellationToken);
-        await dbContext.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await dbContext.Products.AddAsync(product, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+
+            return Result.Failure<string>(ProductErrors.DatabaseError(ex));
+        }
 
         return Result.Success<string>($"Product with {product.Id} successfully created.");
     }

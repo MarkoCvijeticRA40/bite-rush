@@ -25,7 +25,6 @@ internal sealed class GetProductByIdQueryHandler(IApplicationDbContext _dbContex
             Name = product.Name,
             Description = product.Description,
             Images = product.Images,
-            //PriceId = product.ProductPriceId.ToString(),
             Active = product.Active,
             Updated = product.Updated
         };
