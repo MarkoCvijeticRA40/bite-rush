@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Data;
-using Domain.Todos;
+using Domain.Products;
 using Domain.Users;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,14 +11,20 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     : DbContext(options), IApplicationDbContext
 {
     public DbSet<User> Users { get; set; }
-
-    public DbSet<TodoItem> TodoItems { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ProductPrice> ProductPrices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         modelBuilder.HasDefaultSchema(Schemas.Default);
+
+        modelBuilder.Entity<ProductPrice>()
+                    .HasOne(pp => pp.Product)
+                    .WithMany(p => p.Prices)
+                    .HasForeignKey(pp => pp.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

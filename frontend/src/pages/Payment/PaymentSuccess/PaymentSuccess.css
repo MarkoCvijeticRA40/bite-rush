@@ -1,0 +1,44 @@
+.success-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem auto;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    background-color: #fff;
+  }
+  
+  .success-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .success-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .success-card .description {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .success-card button {
+    background-color: #6772e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .success-card button:hover {
+    background-color: #5469d4;
+  }
+  
