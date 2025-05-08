@@ -18,7 +18,7 @@ jobs:
           dotnet-version: '9.0.102'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./CleanArchitecture.sln
 
       - name: Build solution
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ./CleanArchitecture.sln --configuration Release --no-restore
