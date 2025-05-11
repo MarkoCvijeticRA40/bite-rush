@@ -1,9 +1,9 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Products.Create;
-using Application.Products.Delete;
-using Application.Products.Update;
-using Application.Stripe.ProductPrices;
+using Application.Stripe.ProductPrices.Create;
 using Application.Stripe.ProductPrices.Update;
+using Application.Stripe.Products.Create;
+using Application.Stripe.Products.Delete;
+using Application.Stripe.Products.Update;
 using Domain.Stripe.Webhooks;
 using MediatR;
 using Microsoft.Extensions.Logging;

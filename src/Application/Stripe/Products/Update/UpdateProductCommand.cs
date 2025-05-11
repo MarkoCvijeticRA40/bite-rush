@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 
-namespace Application.Products.Update;
+namespace Application.Stripe.Products.Update;
 public sealed record UpdateProductCommand(
     string Id,
     string Name,

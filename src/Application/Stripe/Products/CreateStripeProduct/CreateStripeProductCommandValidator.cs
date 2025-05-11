@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Application.Products.Create;
+namespace Application.Stripe.Products.CreateStripeProduct;
 internal sealed class CreateStripeProductCommandValidator : AbstractValidator<CreateStripeProductCommand>
 {
     public CreateStripeProductCommandValidator()

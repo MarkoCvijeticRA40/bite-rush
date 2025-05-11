@@ -4,7 +4,7 @@ using Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
-namespace Application.Products.Get;
+namespace Application.Stripe.Products.Get;
 
 internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext)
     : IQueryHandler<GetProductsQuery, List<ProductResponse>>
@@ -19,7 +19,7 @@ internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext)
             Id = product.Id,
             Name = product.Name ?? string.Empty,
             Description = product.Description ?? string.Empty,
-            Images = product.Images ?? new List<string>(),
+            Images = product.Images ?? [],
             Active = product.Active,
             Updated = product.Updated
         }).ToList();

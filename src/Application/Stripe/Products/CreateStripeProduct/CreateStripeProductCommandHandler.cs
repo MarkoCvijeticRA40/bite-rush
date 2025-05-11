@@ -3,7 +3,7 @@ using Domain.Products;
 using SharedKernel;
 using Stripe;
 
-namespace Application.Products.Create;
+namespace Application.Stripe.Products.CreateStripeProduct;
 
 internal sealed class CreateStripeProductCommandHandler() : ICommandHandler<CreateStripeProductCommand, string>
 {

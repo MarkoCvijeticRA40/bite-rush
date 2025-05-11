@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 
-namespace Application.Products.Create;
+namespace Application.Stripe.Products.Create;
 public sealed record class CreateProductCommand(
     string Id,
     string Name, 

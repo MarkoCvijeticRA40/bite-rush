@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Messaging;
 
-namespace Application.Products.Delete;
+namespace Application.Stripe.Products.Delete;
+
 public sealed record DeleteProductCommand(string ProductId) : ICommand<string>;
