@@ -12,5 +12,5 @@ public sealed class Product : Entity
     public List<string> Images { get; set; } = [];
 
     //Navigation Properties
-    public ICollection<ProductPrice> Prices { get; set; }
+    public IList<ProductPrice> Prices { get; set; }
 }
