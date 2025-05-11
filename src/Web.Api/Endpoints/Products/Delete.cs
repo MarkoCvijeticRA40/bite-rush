@@ -1,4 +1,4 @@
-﻿using Application.Products.Delete;
+﻿using Application.Stripe.Products.Delete;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;

@@ -1,4 +1,5 @@
-﻿namespace Application.Products.GetById;
+﻿namespace Application.Stripe.Products.GetById;
+
 public class ProductResponse
 {
     public string Id { get; set; }

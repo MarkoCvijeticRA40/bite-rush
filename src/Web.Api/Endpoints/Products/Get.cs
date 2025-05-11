@@ -1,4 +1,4 @@
-﻿using Application.Products.Get;
+﻿using Application.Stripe.Products.Get;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;

@@ -4,7 +4,8 @@ using Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
-namespace Application.Products.GetById;
+namespace Application.Stripe.Products.GetById;
+
 internal sealed class GetProductByIdQueryHandler(IApplicationDbContext _dbContext)
     : IQueryHandler<GetProductByIdQuery, ProductResponse>
 {

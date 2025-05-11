@@ -9,7 +9,7 @@ public sealed class Product : Entity
     public long Updated { get; set; }
     public bool Active { get; set; }
     public bool LiveMode { get; set; }
-    public List<string> Images { get; set; } = new();
+    public List<string> Images { get; set; } = [];
 
     //Navigation Properties
     public ICollection<ProductPrice> Prices { get; set; }

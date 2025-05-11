@@ -4,7 +4,7 @@ using Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
-namespace Application.Products.Delete;
+namespace Application.Stripe.Products.Delete;
 
 internal sealed class DeleteProductCommandHandler(IApplicationDbContext context) : ICommandHandler<DeleteProductCommand, string>
 {

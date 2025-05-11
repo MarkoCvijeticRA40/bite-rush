@@ -3,7 +3,7 @@ using Application.Abstractions.Messaging;
 using Domain.Products;
 using SharedKernel;
 
-namespace Application.Products.Create;
+namespace Application.Stripe.Products.Create;
 
 internal sealed class CreateProductCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateProductCommand, string>
 {

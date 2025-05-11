@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 using Stripe;
 
-namespace Application.Products.Update;
+namespace Application.Stripe.Products.Update;
 
 internal sealed class UpdateProductCommandHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateProductCommand, string>
 {
