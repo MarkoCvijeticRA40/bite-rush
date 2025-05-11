@@ -2,4 +2,4 @@
 
 namespace Application.Stripe.Products.Get;
 
-public sealed record GetProductsQuery() : IQuery<List<ProductResponse>>;
+public sealed record GetProductsQuery() : IQuery<List<GetProductsResponse>>;

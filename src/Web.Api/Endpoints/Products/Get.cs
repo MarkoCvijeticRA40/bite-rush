@@ -13,7 +13,7 @@ internal sealed class Get : IEndpoint
         {
             var command = new GetProductsQuery();
 
-            Result<List<ProductResponse>> result = await sender.Send(command, cancellationToken);
+            Result<List<GetProductsResponse>> result = await sender.Send(command, cancellationToken);
 
             return result.Match(Results.Ok, CustomResults.Problem);
         })
