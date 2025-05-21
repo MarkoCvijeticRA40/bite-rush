@@ -1,4 +1,5 @@
-﻿using Application.Abstractions.Data;
+﻿using Application.Abstractions.Azure;
+using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Application.Helpers;
 using Domain.Products;
@@ -7,7 +8,7 @@ using SharedKernel;
 
 namespace Application.Stripe.Products.Get;
 
-internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext)
+internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext, IBlobStorageService _blobStorageService)
     : IQueryHandler<GetProductsQuery, List<GetProductsResponse>>
 {
     public async Task<Result<List<GetProductsResponse>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
@@ -21,7 +22,7 @@ internal sealed class GetProductsQueryHandler(IApplicationDbContext _dbContext)
             Id = product.Id,
             Name = product.Name ?? string.Empty,
             Description = product.Description ?? string.Empty,
-            Images = product.Images ?? [],
+            Images = _blobStorageService.GetSecureBlobUrls(product.Images),
             Active = product.Active,
             Updated = product.Updated,
             Price = product.Prices.First(p => p.Active).UnitAmount,
