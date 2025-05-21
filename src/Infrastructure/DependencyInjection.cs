@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using Application.Abstractions.Authentication;
+using Application.Abstractions.Azure;
 using Application.Abstractions.Data;
 using Infrastructure.Authentication;
 using Infrastructure.Authorization;
+using Infrastructure.Azure;
 using Infrastructure.Database;
 using Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +33,19 @@ public static class DependencyInjection
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+        services.AddSingleton<IBlobStorageService>(sp =>
+        {
+            IConfiguration configuration = sp.GetRequiredService<IConfiguration>();
+
+            string connectionString = configuration["Azure:Blob:ConnectionString"]
+                ?? throw new InvalidOperationException("Missing configuration: Azure:Blob:ConnectionString");
+
+            string basePath = configuration["Azure:Blob:ImageBasePath"]
+                ?? throw new InvalidOperationException("Missing configuration: Azure:Blob:ImageBasePath");
+
+            return new BlobStorageService(connectionString, basePath);
+        });
 
         return services;
     }
