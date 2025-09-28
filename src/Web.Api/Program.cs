@@ -14,15 +14,19 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configu
 
 builder.Services.AddSwaggerGenWithAuth();
 
+builder.Services.AddSignalR();
+
 builder.Services
     .AddApplication()
     .AddPresentation()
     .AddInfrastructure(builder.Configuration)
     .AddCors(options =>
     options.AddPolicy("AllowReactApp", policy =>
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000",
+                           "https://b01e-82-117-210-2.ngrok-free.app")
               .AllowAnyHeader()
-              .AllowAnyMethod()));
+              .AllowAnyMethod()
+              .AllowCredentials()));
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
