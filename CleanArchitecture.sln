@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{D6533C3D-C937-4B5B-B88F-359850F2137B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions", "..\AzureFunctions\AzureFunctions\AzureFunctions.csproj", "{B7C79977-2FE9-561B-7E63-152AAFE9470D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C79977-2FE9-561B-7E63-152AAFE9470D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C79977-2FE9-561B-7E63-152AAFE9470D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C79977-2FE9-561B-7E63-152AAFE9470D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C79977-2FE9-561B-7E63-152AAFE9470D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

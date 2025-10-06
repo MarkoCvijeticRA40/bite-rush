@@ -1,8 +1,11 @@
 using System.Reflection;
 using Application;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using HealthChecks.UI.Client;
 using Infrastructure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Serilog;
 using Stripe;
 using Web.Api;
@@ -23,6 +26,20 @@ builder.Services
         policy.WithOrigins("http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod()));
+
+if (builder.Environment.IsDevelopment())
+{
+    IConfigurationSection keyVaultURL = builder.Configuration.GetSection("KeyVault:KeyVaultURL");
+    IConfigurationSection keyVaultClientId = builder.Configuration.GetSection("KeyVault:ClientId");
+    IConfigurationSection keyVaultClientSecret = builder.Configuration.GetSection("KeyVault:ClientSecret");
+    IConfigurationSection keyVaultDirectoryID = builder.Configuration.GetSection("KeyVault:DirectoryID");
+
+    var credential = new ClientSecretCredential(keyVaultDirectoryID.ToString(), keyVaultClientId.ToString(), keyVaultClientSecret.ToString());
+
+    builder.Configuration.AddAzureKeyVault(keyVaultURL.Value, keyVaultClientId.Value, keyVaultClientSecret.Value, new DefaultKeyVaultSecretManager());
+
+    var client = new SecretClient(new Uri(keyVaultURL.Value!.ToString()), credential);
+}
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
