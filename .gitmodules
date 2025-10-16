@@ -1,0 +1,3 @@
+[submodule "AzureFunctions"]
+	path = AzureFunctions
+	url = https://github.com/MarkoCvijeticRA40/Azure-Functions
