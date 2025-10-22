@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using Application.Abstractions.Authentication;
 using Application.Abstractions.Data;
+using Application.Abstractions.Messaging;
+using Application.Azure;
+using Azure.Storage.Queues;
 using Infrastructure.Authentication;
 using Infrastructure.Authorization;
 using Infrastructure.Database;
@@ -80,6 +83,9 @@ public static class DependencyInjection
         services.AddScoped<IUserContext, UserContext>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<ITokenProvider, TokenProvider>();
+
+        services.AddSingleton(new QueueServiceClient(configuration.GetConnectionString("AzureQueue")));
+        services.AddScoped<IEventBus, AzureQueueEventBusHandler>();
 
         return services;
     }

@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "tests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{D6533C3D-C937-4B5B-B88F-359850F2137B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions", "AzureFunctions\AzureFunctions.csproj", "{8169A089-AFEF-4955-BEDF-14530EBC9521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "..\FunctionApp\FunctionApp\FunctionApp.csproj", "{02FC1A11-E6AD-40E9-A2FF-167CF4B63997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +66,10 @@ Global
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6533C3D-C937-4B5B-B88F-359850F2137B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8169A089-AFEF-4955-BEDF-14530EBC9521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8169A089-AFEF-4955-BEDF-14530EBC9521}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8169A089-AFEF-4955-BEDF-14530EBC9521}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8169A089-AFEF-4955-BEDF-14530EBC9521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FC1A11-E6AD-40E9-A2FF-167CF4B63997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FC1A11-E6AD-40E9-A2FF-167CF4B63997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FC1A11-E6AD-40E9-A2FF-167CF4B63997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FC1A11-E6AD-40E9-A2FF-167CF4B63997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
