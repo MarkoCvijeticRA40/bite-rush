@@ -3,6 +3,7 @@ using Application;
 using HealthChecks.UI.Client;
 using Infrastructure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Azure;
 using Serilog;
 using Stripe;
 using Web.Api;
@@ -23,6 +24,25 @@ builder.Services
         policy.WithOrigins("http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod()));
+
+if (builder.Environment.IsDevelopment())
+{
+    /*IConfigurationSection keyVaultURL = builder.Configuration.GetSection("KeyVault:KeyVaultURL");
+    IConfigurationSection keyVaultClientId = builder.Configuration.GetSection("KeyVault:ClientId");
+    IConfigurationSection keyVaultClientSecret = builder.Configuration.GetSection("KeyVault:ClientSecret");
+    IConfigurationSection keyVaultDirectoryID = builder.Configuration.GetSection("KeyVault:DirectoryID");
+
+    var credential = new ClientSecretCredential(keyVaultDirectoryID.ToString(), keyVaultClientId.ToString(), keyVaultClientSecret.ToString());
+
+    builder.Configuration.AddAzureKeyVault(keyVaultURL.Value, keyVaultClientId.Value, keyVaultClientSecret.Value, new DefaultKeyVaultSecretManager());
+
+    var client = new SecretClient(new Uri(keyVaultURL.Value!.ToString()), credential);*/
+}
+
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddQueueServiceClient(builder.Configuration.GetConnectionString("azurefunctions"));
+});
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
@@ -65,9 +85,3 @@ app.Use(async (context, next) =>
     Console.WriteLine($"?? {context.Request.Method} {context.Request.Path}");
     await next();
 });
-
-// REMARK: Required for functional and integration tests to work.
-namespace Web.Api
-{
-    public partial class Program;
-}

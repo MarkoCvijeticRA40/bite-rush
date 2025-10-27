@@ -7,7 +7,7 @@ using SharedKernel;
 
 namespace Application.Users.Register;
 
-internal sealed class RegisterUserCommandHandler(IApplicationDbContext context, IPasswordHasher passwordHasher)
+internal sealed class RegisterUserCommandHandler(IApplicationDbContext context, IPasswordHasher passwordHasher, IEventBus eventBus)
     : ICommandHandler<RegisterUserCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
@@ -31,6 +31,15 @@ internal sealed class RegisterUserCommandHandler(IApplicationDbContext context, 
         context.Users.Add(user);
 
         await context.SaveChangesAsync(cancellationToken);
+
+        var userEvent = new
+        {
+            EventType = "UserRegistered",
+            UserId = user.Id,
+            Timestamp = DateTime.UtcNow
+        };
+
+        await eventBus.PublishAsync(userEvent, cancellationToken);
 
         return user.Id;
     }
