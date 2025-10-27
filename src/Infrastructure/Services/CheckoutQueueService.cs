@@ -11,14 +11,11 @@ public class CheckoutQueueService : ICheckoutQueueService
 {
     private readonly QueueClient _queueClient;
     private readonly ILogger<CheckoutQueueService> _logger;
-    private readonly IConfiguration _configuration;
     
     public CheckoutQueueService(IConfiguration configuration, ILogger<CheckoutQueueService> logger, string connectionString)
     {
         _logger = logger;
-        _configuration = configuration;
         
-        _configuration = configuration["AzureStorage:ConnectionString"];
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new InvalidOperationException("Azure Storage connection string is not configured.");
@@ -75,4 +72,5 @@ public class CheckoutQueueService : ICheckoutQueueService
             Quantity = item.Quantity
         };
     }
-}*/
+}
+*/
