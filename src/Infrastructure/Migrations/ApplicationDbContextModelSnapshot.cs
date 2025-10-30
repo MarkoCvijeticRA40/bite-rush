@@ -4,20 +4,17 @@ using System.Collections.Generic;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Database.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250424162141_ChangeFKType")]
-    partial class ChangeFKType
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,6 +135,10 @@ namespace Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
+
+                    b.Property<DateTime>("RegistrationDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("registration_date_time");
 
                     b.HasKey("Id")
                         .HasName("pk_users");

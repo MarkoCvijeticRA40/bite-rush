@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Application.Abstractions.Authentication;
+﻿using Application.Abstractions.Authentication;
 using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Application.Azure;
@@ -66,19 +65,6 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(o =>
-            {
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!)),
-                    ValidIssuer = configuration["Jwt:Issuer"],
-                    ValidAudience = configuration["Jwt:Audience"],
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-
         services.AddHttpContextAccessor();
         services.AddScoped<IUserContext, UserContext>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();

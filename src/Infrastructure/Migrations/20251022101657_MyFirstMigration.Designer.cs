@@ -10,11 +10,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Database.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416164257_Change_Product_Price_Relationship")]
-    partial class Change_Product_Price_Relationship
+    [Migration("20251022101657_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,9 +29,8 @@ namespace Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Domain.Products.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
 
                     b.Property<bool>("Active")
@@ -69,9 +68,8 @@ namespace Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Domain.Products.ProductPrice", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
 
                     b.Property<bool>("Active")
@@ -92,17 +90,17 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("livemode");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid")
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("product_id");
 
-                    b.Property<long>("UnitAmount")
+                    b.Property<long?>("UnitAmount")
                         .HasColumnType("bigint")
                         .HasColumnName("unit_amount");
 
-                    b.Property<string>("UnitAmountDecimal")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<decimal?>("UnitAmountDecimal")
+                        .HasColumnType("numeric")
                         .HasColumnName("unit_amount_decimal");
 
                     b.HasKey("Id")
@@ -140,6 +138,10 @@ namespace Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
+
+                    b.Property<DateTime>("RegistrationDateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("registration_date_time");
 
                     b.HasKey("Id")
                         .HasName("pk_users");
