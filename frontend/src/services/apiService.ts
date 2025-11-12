@@ -1,5 +1,5 @@
 import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from '../authConfig';
+import { msalConfig, apiRequest } from '../authConfig';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -16,7 +16,7 @@ class ApiService {
 
             // Try to get token silently first
             const silentRequest = {
-                scopes: ['openid', 'profile', 'email'],
+                scopes: apiRequest.scopes,
                 account: activeAccount,
             };
 

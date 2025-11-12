@@ -57,7 +57,15 @@ export const msalConfig: Configuration = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest: PopupRequest = {
-    scopes: [],
+    scopes: ['openid', 'profile', 'email'],
+};
+
+/**
+ * Add here the scopes to request when obtaining an access token for your custom API
+ * For example: api://your-api-client-id/access_as_user
+ */
+export const apiRequest = {
+    scopes: ['openid', 'profile', 'email'],
 };
 
 /**
