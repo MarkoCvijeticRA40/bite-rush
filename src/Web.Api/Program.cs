@@ -8,6 +8,7 @@ using Serilog;
 using Stripe;
 using Web.Api;
 using Web.Api.Extensions;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,13 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddAzureClients(clientBuilder =>
 {
     clientBuilder.AddQueueServiceClient(builder.Configuration.GetConnectionString("azurefunctions"));
+});
+
+builder.Services.AddApplicationInsightsTelemetryWorkerService();
+
+builder.Services.AddOpenTelemetry().UseAzureMonitor(options =>
+{
+    options.ConnectionString = builder.Configuration.GetSection("Azure:ApplicationInsights").Value;
 });
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());

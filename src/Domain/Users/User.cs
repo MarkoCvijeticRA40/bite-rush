@@ -9,5 +9,5 @@ public sealed class User : Entity
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PasswordHash { get; set; }
-    public DateTime RegistrationDateTime {  get; set; }
+    //public DateTime RegistrationDateTime {  get; set; }
 }
